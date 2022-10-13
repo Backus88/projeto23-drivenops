@@ -1,0 +1,24 @@
+version: "3"
+services:
+  student_db:
+    image: postgres:13
+    container_name: student_db
+    restart: always #container reinicia se morrer
+    ports:
+      - 2345:5432
+    env_file:
+      - ./back-end/.env #configurar POSTGRES_USER, POSTGRES_PASSWORD e POSTGRES_DB
+    volumes:
+      - pg_students:/var/lib/postgresql/data
+
+  node_app:
+    container_name: node_app
+    build: ./back-end/ #Dockerfile do node se encontra na pasta atual
+    ports:
+      - 5000:5000
+    depends_on:
+      - student_db # só sobe quando o postgres tiver no ar
+    env_file:
+      - ./back-end/.env #configurar DATABASE_URL
+volumes:
+  pg_students:
