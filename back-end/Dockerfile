@@ -8,4 +8,6 @@ EXPOSE 5000
 
 RUN npm i 
 
-CMD ["node", "index.js"]
+RUN npm run build
+
+CMD ["node", "./dist/src/server.js"]
