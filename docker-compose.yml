@@ -20,5 +20,26 @@ services:
       - student_db # só sobe quando o postgres tiver no ar
     env_file:
       - ./back-end/.env #configurar DATABASE_URL
+
+  react_students: 
+    container_name: react_students
+    build: ./front-end
+    volumes:
+      - build_react:/var/www/html
+
+  nginx_students: 
+    container_name: nginx_students
+    build: ./nginx
+    ports:
+      - 80:80
+    volumes:
+      - build_react:/var/www/html
+    depends_on:
+      - student_db
+      - node_app
+      - react_students
+
+
 volumes:
   pg_students:
+  build_react:
