@@ -26,6 +26,7 @@ services:
     build: ./front-end
     volumes:
       - build_react:/var/www/html
+    stdin_open: true
 
   nginx_students: 
     container_name: nginx_students
