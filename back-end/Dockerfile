@@ -10,4 +10,4 @@ RUN npm i
 
 RUN npm run build
 
-CMD ["node", "./dist/src/server.js"]
+CMD ["npm", "start"]
